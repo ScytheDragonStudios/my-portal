@@ -1,1 +1,67 @@
 @import "tailwindcss";
+
+/* Base Styles */
+@layer base {
+    body {
+        @apply bg-black cursor-crosshair;
+    }
+}
+
+/* VHS effects layer */
+@layer components {
+    .vhs-overlay {
+        @apply pointer-events-none fixed inset-0 z-50 overflow-hidden;
+        /* Basic Scanlines/Static layer */
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.05) 0px,
+            rgba(0, 0, 0, 0.05) 1px,
+            transparent 1px,
+            transparent 2px
+        );
+    }
+
+    /* Define the jitter animation */
+    @keyframes vhs-jitter {
+        0% { transform: translate(0, 0) }
+        10% { transform: translate(-2px, 1px) }
+        20% { transform: translate(1px, -1px) }
+        30% { transform: translate(-1px, 2px) }
+        40% { transform: translate(2px, -2px) }
+        50% { transform: translate(-2px, 1px) }
+        60% { transform: translate(1px, -1px) }
+        70% { transform: translate(-1px, 2px) }
+        80% { transform: translate(2px, -2px) }
+        90% { transform: translate(-2px, 1px) }
+        100% { transform: translate(0, 0) }
+    }
+
+    /* Define Chromatic aberrations/distortion breaks */
+    @keyframes tape-break {
+        0%, 90%, 100% {
+            transform: skew(0deg) scale(1);
+            filter: none;
+        }
+        91% {
+            transform: skew(10deg) scale(1.02);
+            filter: drop-shadow(3px 0 red) drop-shadow(-3px 0 blue);
+        }
+        92% {
+            transform: skew(-15deg) scale(1.05);
+            filter: drop-shadow(5px 0 magenta) drop-shadow(-5px 0 cyan);
+        }
+        93% {
+            transform: skew(5deg) scale(1.02);
+            filter: drop-shadow(2px 0 red) drop-shadow(-2px 0 blue);
+        }
+    }
+
+    /*Apply animations to classes */
+    .animate-vhs {
+        animation: vhs-jitter 0.2s steps(1) infinite;
+    }
+
+    .animate-tape-break {
+        animation: tape-break 5s ease-in-out infinite;
+    }
+}
