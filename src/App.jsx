@@ -14,6 +14,8 @@ export default function App() {
       <div className="vhs-lightning"></div>
       <div className="vhs-lightning" style={{ animationDelay: '2.1s', animationDuration: '3s' }}></div>
 
+      <div className="vhs-screech"></div>
+
     
 
       <div className="vhs-static-line opacity-10"></div>
