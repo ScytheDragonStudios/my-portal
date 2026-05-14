@@ -1,13 +1,18 @@
 export default function App() {
   return (
     
-    <div className="min-h-screen bg-black bg-linear-to-b from-black via-red-950 to-black text-zinc-100 flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-black bg-gradient-to-b from-black via-red-950 to-black text-zinc-100 flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden">
       
       {/* VHS Layers */}
       <div className="vhs-overlay animate-vhs opacity-30"></div>
       <div className="vhs-grain"></div>
       <div className="vhs-static-line"></div>
       <div className="vhs-static-line" style={{ animationDelay: '4s' }}></div>
+      
+      {/*Horror Tears*/}
+      <div className="horror-tear"></div>
+      <div className="horror-tear" style={{ animationDelay: '1.2s', animationDuration: '3s' }}></div>
+      <div className="spectral-flash"></div>
 
       {/* Horror Interference Bars */}
       <div className="vhs-interference-bar"></div>
@@ -15,7 +20,6 @@ export default function App() {
       <div className="vhs-interference-bar" style={{ animationDelay: '0.5s', opacity: 0.2 }}></div>
 
       <div className="vhs-static-line"></div>
-
       {/* Main Content */}
       <main className="relative z-10 max-w-2xl w-full text-center space-y-12 animate-tape-break">
         <section>
@@ -46,6 +50,12 @@ export default function App() {
             <span className="text-xl font-bold group-hover:text-red-500">SOURCE CODE // GITHUB</span>
           </a>
         </nav>
+
+        <section className="mt-12 pt-8 border-t border-zinc-900/50">
+        <p className="text-[9px] uppercase tracking-[0.2em] text-red-600/60 font-bold">
+        ⚠ Photosensitivity Warning: This site contains flickering lights and rapid visual distortions.
+        </p>
+        </section>
 
         <footer className="pt-8 opacity-30 font-mono text-[10px]">
           <p className="text-[10px] font-mono tracking-tighter">EST. 2026 // CINCINNATI OH</p>
