@@ -3,17 +3,20 @@ export default function App() {
     
     <div className="min-h-screen bg-black bg-linear-to-b from-black via-red-950 to-black text-zinc-100 flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden">
       
-      {/* 1. Moving Scanlines (from before) */}
+      {/* VHS Layers */}
       <div className="vhs-overlay animate-vhs opacity-30"></div>
-
-      {/* 2. The Grain/Static Texture */}
       <div className="vhs-grain"></div>
-
-      {/* 3. The Horizontal Tracking Error Line */}
       <div className="vhs-static-line"></div>
       <div className="vhs-static-line" style={{ animationDelay: '4s' }}></div>
 
-      {/* 4. Main Content */}
+      {/* Horror Interference Bars */}
+      <div className="vhs-interference-bar"></div>
+      <div className="vhs-interference-bar" style={{ animationDelay: '1.5s', animationDuration: '4s' }}></div>
+      <div className="vhs-interference-bar" style={{ animationDelay: '0.5s', opacity: 0.2 }}></div>
+
+      <div className="vhs-static-line"></div>
+
+      {/* Main Content */}
       <main className="relative z-10 max-w-2xl w-full text-center space-y-12 animate-tape-break">
         <section>
           {/* Glitch 'Stone Akuma' header we built last time */}
