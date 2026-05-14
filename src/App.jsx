@@ -1,19 +1,26 @@
 export default function App() {
   return (
     
-    <div className="min-h-screen bg-black bg-gradient-to-b from-black via-red-950 to-black text-zinc-100 flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-black bg-linear-to-b from-black via-red-950 to-black text-zinc-100 flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden">
       
-      
+      {/* 1. Moving Scanlines (from before) */}
       <div className="vhs-overlay animate-vhs opacity-30"></div>
 
-      
+      {/* 2. The Grain/Static Texture */}
+      <div className="vhs-grain"></div>
+
+      {/* 3. The Horizontal Tracking Error Line */}
+      <div className="vhs-static-line"></div>
+      <div className="vhs-static-line" style={{ animationDelay: '4s' }}></div>
+
+      {/* 4. Main Content */}
       <main className="relative z-10 max-w-2xl w-full text-center space-y-12 animate-tape-break">
         <section>
-          {/* Glitch 'Jinn Klaine' header we built last time */}
+          {/* Glitch 'Stone Akuma' header we built last time */}
           <h1 className="text-7xl font-black tracking-tighter text-white uppercase italic relative group cursor-pointer">
             <span className="relative z-10">Stone <span className="text-red-600">Akuma</span></span>
-            <span className="absolute inset-0 text-cyan-400 opacity-0 group-hover:opacity-70 group-hover:animate-ping z-0">Jinn Klaine</span>
-            <span className="absolute inset-0 text-magenta-500 opacity-0 group-hover:opacity-70 group-hover:animate-pulse z-0 ml-1">Jinn Klaine</span>
+            <span className="absolute inset-0 text-cyan-400 opacity-0 group-hover:opacity-70 group-hover:animate-ping z-0">Stone Akuma</span>
+            <span className="absolute inset-0 text-magenta-500 opacity-0 group-hover:opacity-70 group-hover:animate-pulse z-0 ml-1">Stone Akuma</span>
           </h1>
           <p className="mt-4 text-zinc-500 font-mono text-sm tracking-widest uppercase">
              Cosmic Horror // Developer // Producer
@@ -28,8 +35,8 @@ export default function App() {
           
           {/* Placeholder shop link for now */}
           <a href="#" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
-            <span className="text-xl font-bold group-hover:text-red-500">ANUBIS SUMMONING SHOP</span>
-            <p className="text-xs text-zinc-500 mt-1">Limited Edition EDM Apparel</p>
+            <span className="text-xl font-bold group-hover:text-red-500">Threadware</span>
+            <p className="text-xs text-zinc-500 mt-1">Limited Edition HellDark Apparel :: under construction</p>
           </a>
 
           <a href="https://github.com/ScytheDragonStudios/my-portal" target="_blank" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
@@ -37,8 +44,9 @@ export default function App() {
           </a>
         </nav>
 
-        <footer className="pt-8 opacity-30">
+        <footer className="pt-8 opacity-30 font-mono text-[10px]">
           <p className="text-[10px] font-mono tracking-tighter">EST. 2026 // CINCINNATI OH</p>
+          [ SIGNAL DEGRADATION DETECTED ]
         </footer>
       </main>
     </div>
