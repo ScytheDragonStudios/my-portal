@@ -11,7 +11,6 @@
 @layer components {
     .vhs-overlay {
         @apply pointer-events-none fixed inset-0 z-50 overflow-hidden;
-        /* Basic Scanlines/Static layer */
         background: repeating-linear-gradient(
             0deg,
             rgba(0, 0, 0, 0.05) 0px,
@@ -21,55 +20,27 @@
         );
     }
 
-    /* Define the jitter animation */
     @keyframes vhs-jitter {
         0% { transform: translate(0, 0) }
         10% { transform: translate(-2px, 1px) }
         20% { transform: translate(1px, -1px) }
         30% { transform: translate(-1px, 2px) }
-        40% { transform: translate(2px, -2px) }
-        50% { transform: translate(-2px, 1px) }
-        60% { transform: translate(1px, -1px) }
-        70% { transform: translate(-1px, 2px) }
-        80% { transform: translate(2px, -2px) }
-        90% { transform: translate(-2px, 1px) }
         100% { transform: translate(0, 0) }
     }
 
-    /* Define Chromatic aberrations/distortion breaks */
     @keyframes tape-break {
-        0%, 90%, 100% {
-            transform: skew(0deg) scale(1);
-            filter: none;
-        }
-        91% {
-            transform: skew(10deg) scale(1.02);
-            filter: drop-shadow(3px 0 red) drop-shadow(-3px 0 blue);
-        }
-        92% {
-            transform: skew(-15deg) scale(1.05);
-            filter: drop-shadow(5px 0 magenta) drop-shadow(-5px 0 cyan);
-        }
-        93% {
-            transform: skew(5deg) scale(1.02);
-            filter: drop-shadow(2px 0 red) drop-shadow(-2px 0 blue);
-        }
+        0%, 90%, 100% { transform: skew(0deg) scale(1); filter: none; }
+        91% { transform: skew(10deg) scale(1.02); filter: drop-shadow(3px 0 red) drop-shadow(-3px 0 blue); }
+        92% { transform: skew(-15deg) scale(1.05); filter: drop-shadow(5px 0 magenta) drop-shadow(-5px 0 cyan); }
     }
 
-    /*Apply animations to classes */
-    .animate-vhs {
-        animation: vhs-jitter 0.2s steps(1) infinite;
-    }
-
-    .animate-tape-break {
-        animation: tape-break 5s ease-in-out infinite;
-    }
+    .animate-vhs { animation: vhs-jitter 0.2s steps(1) infinite; }
+    .animate-tape-break { animation: tape-break 5s ease-in-out infinite; }
 
     @keyframes vhs-tracking {
         0% { top: -10%; opacity: 0; }
         5% { opacity: 0.1; }
         10% { top: 100%; opacity: 0.1; }
-        11% { top: -10%; opacity: 0; }
         100% { top: -10%; opacity: 0; }
     }
 
@@ -89,47 +60,17 @@
         animation: static-move 0.2s steps(5) infinite;
     }
 
-    @keyframes ghost-interference {
-        0% { clip-path: inset(10% 0 85% 0); transform: translateX(-5px); opacity: 0; }
-        2% { clip-path: inset(10% 0 85% 0); transform: translateX(5px); opacity: 0.8; }
-        5% { clip-path: inset(40% 0 45% 0); transform: translateX(-10-x); opacity: 0.5; }
-        7% { opacity: 0; }
-        15% { clip-path: inset(70% 0 15% 0); transform: translateX(15px); opacity: 0.6; }
-        17% { opacity: 0; }
+    @keyframes horizontal-lightning {
+        0% { clip-path: inset(20% 0 78% 0); transform: translateX(-100%) scaleY(0.1); opacity: 0; }
+        5% { clip-path: inset(20% 0 78% 0); transform: translateX(0) scaleY(1.5); opacity: 1; }
+        40% { clip-path: inset(80% 0 18% 0); transform: translateX(-10%) scaleY(2); opacity: 1; }
         100% { opacity: 0; }
     }
 
-    .vhs-interference-bar {
-        @apply absolute inset-0 bg-white/10 pointer-events-none z-50;
-        /* This flickers the slice across the screen randomly */
-        animation: ghost-interference 3s contrast(150%) infinite;
-    }
-
-    @keyframes ghost-tear {
-        0%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); }
-        10% { clip-path: inset(20% 0 75% 0); opacity: 0.8; transform: translateX(-20px); filter: brightness(2) contrast(2); }
-        12% { clip-path: inset(20% 0 75% 0); opacity: 0; transform: translateX(20px); }
-        45% { clip-path: inset(80% 0 10% 0); opacity: 1; transform: translateX(50px); filter: hue-roatate(90deg); }
-        47% { opacity: 0; }
-        80% { clip-path: inset(45% 0 50% 0); opacity: 0.6; transform: translateX(-40px); }
-        82% { opacity: 0; }
-    }
-
-    @keyframes spectral-flash {
-        0%, 95%, 100% { opacity: 0; }
-        96% { opacity: 0.2; background: white; }
-        97% { opacity: 0; }
-    }
-
-    .horror-tear {
-        @apply absolute inset-0 pointer-events-none z-50 bg-white/20;
-        /*mix-blend-mode, makes the 'tear' look spectral and ghostie*/
-        mix-blend-mode: overlay;
-        animation: ghost-tear 4s steps(1) infinite;
-    }
-
-    .spectral-flash {
-        @apply absolute inset-0 pointer-events-none z-[60];
-        animation: spectral-flash 7s linear infinite;
+    .vhs-lightning {
+        @apply absolute inset-0 pointer-events-none z-[110] bg-white;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        mix-blend-mode: color-dodge;
+        animation: horizontal-lightning 4s steps(1) infinite;
     }
 }

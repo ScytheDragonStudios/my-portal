@@ -10,16 +10,13 @@ export default function App() {
       <div className="vhs-static-line" style={{ animationDelay: '4s' }}></div>
       
       {/*Horror Tears*/}
-      <div className="horror-tear"></div>
-      <div className="horror-tear" style={{ animationDelay: '1.2s', animationDuration: '3s' }}></div>
-      <div className="spectral-flash"></div>
 
-      {/* Horror Interference Bars */}
-      <div className="vhs-interference-bar"></div>
-      <div className="vhs-interference-bar" style={{ animationDelay: '1.5s', animationDuration: '4s' }}></div>
-      <div className="vhs-interference-bar" style={{ animationDelay: '0.5s', opacity: 0.2 }}></div>
+      <div className="vhs-lightning"></div>
+      <div className="vhs-lightning" style={{ animationDelay: '2.1s', animationDuration: '3s' }}></div>
 
-      <div className="vhs-static-line"></div>
+    
+
+      <div className="vhs-static-line opacity-10"></div>
       {/* Main Content */}
       <main className="relative z-10 max-w-2xl w-full text-center space-y-12 animate-tape-break">
         <section>
@@ -49,6 +46,10 @@ export default function App() {
           <a href="https://github.com/ScytheDragonStudios/my-portal" target="_blank" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
             <span className="text-xl font-bold group-hover:text-red-500">SOURCE CODE // GITHUB</span>
           </a>
+
+          <a href="https://open.spotify.com/artist/28aZmlNqJ23ocFum6cy69C?si=k48xAATUSq2fsTZkSP4oTg" target="_blank" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
+            <span className="text-xl font-bold group-hover:text-red-500">MUSIC // Bill from Accounting</span>
+          </a>
         </nav>
 
         <section className="mt-12 pt-8 border-t border-zinc-900/50">
@@ -58,7 +59,7 @@ export default function App() {
         </section>
 
         <footer className="pt-8 opacity-30 font-mono text-[10px]">
-          <p className="text-[10px] font-mono tracking-tighter">EST. 2026 // CINCINNATI OH</p>
+          <p className="text-[10px] font-mono tracking-tighter">Coded by STONE AKUMA || EST. 2026 // CINCINNATI OH</p>
           [ SIGNAL DEGRADATION DETECTED ]
         </footer>
       </main>
