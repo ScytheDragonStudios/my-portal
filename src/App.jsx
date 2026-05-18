@@ -52,6 +52,11 @@ export default function App() {
           <a href="https://open.spotify.com/artist/28aZmlNqJ23ocFum6cy69C?si=k48xAATUSq2fsTZkSP4oTg" target="_blank" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
             <span className="text-xl font-bold group-hover:text-red-500">MUSIC // Bill from Accounting</span>
           </a>
+
+          <a href="mailto:contact@cipher-and-coil.com?subject=Business%20Inquiry%20-%20Stone%20Akuma" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
+            <span className="text-xl font-bold group-hover:text-red-500">CONTACT // EMAIL</span>
+            <p className="text-xs text-zinc-500 mt-1">bfa@cipher-and-coil.com</p>
+          </a>
         </nav>
 
         <section className="mt-12 pt-8 border-t border-zinc-900/50">
