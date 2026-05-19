@@ -35,9 +35,43 @@ export default function App() {
 
         {/* The links - they stay static, but the main container (above) skews them */}
         <nav className="grid grid-cols-1 gap-4">
-          <a href="https://twitch.tv/stoneakuma" target="_blank" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
-            <span className="text-xl font-bold group-hover:text-red-500">LIVE ON TWITCH</span>
-          </a>
+
+          {/*Stream Dropdown system*/}
+          <div className="relative group/stream border border-zinc-900/50 transition-all duration-300 hover: border-red-600">
+            {/*Main button / Trigger Header*/}
+            <div className="p-4 cursor-pointer">
+              <span className="text-xl font-bold text-zinc-100 group-hover/stream:text-red-500 tracking-wider">
+                WATCH LIVE
+              </span>
+              <p className="text-xs text-zinc-500 mt-1 uppercase tracking-widest">Select Platform ↓</p>
+            </div>
+
+            {/*Dropdown Menu*/}
+            <div className="hidden group-hover/stream:flex flex-col border-t border-zinc-800 bg-black/90 w-full animate-vhs">
+              <a
+                href="https://twitch.tv/stoneakuma"
+                target="_blank"
+                rel="noreferrer"
+                className="p-3 border-b border-zinc-900 hover:bg-zinc-900 text-sm font-mono tracking-widest text-zinc-300 hover:text-red-500 transition-colors"
+                >
+                  // TWITCH.TV 
+              </a>
+              <a 
+                href="https://youtube.com/@stoneakuma"
+                target="_blank"
+                rel="noreferrer"
+                className="p-3 border-b border-zinc-900 hover:bg-zinc-900 text-sm font-mono tracking-widest text-zinc-300 hover:text-red-500 transition-colors">
+                  // YOUTUBE
+                </a>
+                <a
+                href="https://kick.com/stoneakuma"
+                target="_blank"
+                rel="noreferrer"
+                className="p-3 hover:bg-zinc-900 text-sm font-mono tracking-widest text-zinc-300 hover:text-red-500 transition-colors">
+                  // KICK 
+                </a>
+            </div>
+          </div>
           
           {/* Placeholder shop link for now */}
           <a href="#" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
@@ -46,7 +80,7 @@ export default function App() {
           </a>
 
           <a href="https://github.com/ScytheDragonStudios/my-portal" target="_blank" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
-            <span className="text-xl font-bold group-hover:text-red-500">SOURCE CODE // GITHUB</span>
+            <span className="text-xl font-bold group-hover:text-red-500">SOURCE CODE</span>
           </a>
 
           <a href="https://open.spotify.com/artist/28aZmlNqJ23ocFum6cy69C?si=k48xAATUSq2fsTZkSP4oTg" target="_blank" className="group p-4 border border-zinc-800 bg-zinc-900/50 hover:border-red-600 transition-all duration-300">
