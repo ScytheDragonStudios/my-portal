@@ -11,13 +11,11 @@
 @layer components {
     .vhs-overlay {
         @apply pointer-events-none fixed inset-0 z-50 overflow-hidden;
-        background: repeating-linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.05) 0px,
-            rgba(0, 0, 0, 0.05) 1px,
-            transparent 1px,
-            transparent 2px
-        );
+        background: repeating-linear-gradient(0deg,
+                rgba(0, 0, 0, 0.05) 0px,
+                rgba(0, 0, 0, 0.05) 1px,
+                transparent 1px,
+                transparent 2px);
     }
 
     @keyframes vhs-jitter {
@@ -29,13 +27,27 @@
     }
 
     @keyframes tape-break {
-        0%, 90%, 100% { transform: skew(0deg) scale(1); filter: none; }
-        91% { transform: skew(10deg) scale(1.02); filter: drop-shadow(3px 0 red) drop-shadow(-3px 0 blue); }
-        92% { transform: skew(-15deg) scale(1.05); filter: drop-shadow(5px 0 magenta) drop-shadow(-5px 0 cyan); }
+        0%, 90%, 100% {
+            transform: skew(0deg) scale(1);
+            filter: none;
+        }
+        91% {
+            transform: skew(10deg) scale(1.02);
+            filter: drop-shadow(3px 0 red) drop-shadow(-3px 0 blue);
+        }
+        92% {
+            transform: skew(-15deg) scale(1.05);
+            filter: drop-shadow(5px 0 magenta) drop-shadow(-5px 0 cyan);
+          }
     }
 
-    .animate-vhs { animation: vhs-jitter 0.2s steps(1) infinite; }
-    .animate-tape-break { animation: tape-break 5s ease-in-out infinite; }
+    .animate-vhs {
+        animation: vhs-jitter 0.2s steps(1) infinite;
+    }
+
+    .animate-tape-break {
+        animation: tape-break 5s ease-in-out infinite;
+    }
 
     @keyframes vhs-tracking {
         0% { top: -10%; opacity: 0; }
@@ -60,11 +72,85 @@
         animation: static-move 0.2s steps(5) infinite;
     }
 
+    @keyframes screech-lines {
+        /* Keep the screen clean for most of the 5s loop */
+        0%, 89.9%, 100% {
+            clip-path: inset(0 0 100% 0);
+            opacity: 0;
+        }
+        /* Strike 1: High and thin */
+        90% {
+            clip-path: inset(15% 0 84.5% 0);
+            opacity: 1;
+            background: white;
+            transform: translateX(-10px);
+        }
+        /* Strike 2: Middle jump (The chromatic peak) */
+        91% {
+            clip-path: inset(45% 0 54.5% 0);
+            opacity: 1;
+            background: white;
+            transform: translateX(15px);
+        }
+        /* Strike 3: Low and wide */
+        92% {
+            clip-path: inset(82% 0 17.5% 0);
+            opacity: 1;
+            background: white;
+            transform: translateX(-5px);
+        }
+        /* Strike 4: Random scatter */
+        93% {
+            clip-path: inset(33% 0 66.5% 0);
+            opacity: 0.7;
+            background: white;
+        }
+    }
+
+    .vhs-screech {
+        @apply absolute inset-0 pointer-events-none z-[120];
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.99' numOctaves='1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        mix-blend-mode: screen;
+        animation: screech-lines 5s steps(1) infinite;
+    }
+
+    @keyframes logo-chromatic {
+        0%, 100% { filter: drop-shadow(1px 0px 0px rgba(255,0,0,0.7)) drop-shadow(-1px 0px 0px rgba(0,255,255,0.7)); }
+        50% { filter: drop-shadow(-3px 1px 0px rgba(255,0,0,0.8)) drop-shadow(3px -1px 0px rgba(0,255,255,0.8)) brightness(1.2); }  
+    }
+
+    .horror-svg {
+        @apply w-7 h-7 min-w-[1.75rem] min-h-[1.75rem] text-zinc-400 transition-all duration-300 fill-current;
+        filter: drop-shadow(0px 2px 4px rgba(185, 28, 28, 0.4));
+    }
+
+    .horror-svg:hover {
+        @apply text-white;
+        animation: logo-chromatic 0.3s steps(1) infinite;
+    }
+
     @keyframes horizontal-lightning {
-        0% { clip-path: inset(20% 0 78% 0); transform: translateX(-100%) scaleY(0.1); opacity: 0; }
-        5% { clip-path: inset(20% 0 78% 0); transform: translateX(0) scaleY(1.5); opacity: 1; }
-        40% { clip-path: inset(80% 0 18% 0); transform: translateX(-10%) scaleY(2); opacity: 1; }
-        100% { opacity: 0; }
+        0% {
+            clip-path: inset(20% 0 78% 0);
+            transform: translateX(-100%) scaleY(0.1);
+            opacity: 0;
+        }
+
+        5% {
+            clip-path: inset(20% 0 78% 0);
+            transform: translateX(0) scaleY(1.5);
+            opacity: 1;
+        }
+
+        40% {
+            clip-path: inset(80% 0 18% 0);
+            transform: translateX(-10%) scaleY(2);
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
     }
 
     .vhs-lightning {
@@ -73,48 +159,4 @@
         mix-blend-mode: color-dodge;
         animation: horizontal-lightning 4s steps(1) infinite;
     }
-
-    @keyframes screech-lines {
-  /* Keep the screen clean for most of the 5s loop */
-  0%, 89.9%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
-
-  /* Strike 1: High and thin */
-  90% { 
-    clip-path: inset(15% 0 84.5% 0); 
-    opacity: 1; 
-    background: white;
-    transform: translateX(-10px);
-  }
-  
-  /* Strike 2: Middle jump (The chromatic peak) */
-  91% { 
-    clip-path: inset(45% 0 54.5% 0); 
-    opacity: 1; 
-    background: white;
-    transform: translateX(15px);
-  }
-
-  /* Strike 3: Low and wide */
-  92% { 
-    clip-path: inset(82% 0 17.5% 0); 
-    opacity: 1; 
-    background: white;
-    transform: translateX(-5px);
-  }
-
-  /* Strike 4: Random scatter */
-  93% {
-    clip-path: inset(33% 0 66.5% 0);
-    opacity: 0.7;
-    background: white;
-  }
-}
-
-.vhs-screech {
-  @apply absolute inset-0 pointer-events-none z-[120];
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.99' numOctaves='1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  /* Changed to SCREEN for maximum brightness against the red */
-  mix-blend-mode: screen; 
-  animation: screech-lines 5s steps(1) infinite;
-}
 }
