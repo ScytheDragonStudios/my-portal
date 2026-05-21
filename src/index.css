@@ -124,7 +124,7 @@
         filter: drop-shadow(0px 2px 4px rgba(185, 28, 28, 0.4));
     }
 
-    .horror-svg:hover {
+    .reality-broken .horror-svg:hover {
         @apply text-white;
         animation: logo-chromatic 0.3s steps(1) infinite;
     }
