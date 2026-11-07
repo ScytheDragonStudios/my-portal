@@ -4,8 +4,8 @@ export default function VectorKarts({ onBack, isBroken }) {
   const [lightboxImg, setLightboxImg] = useState(null);
 
   const screenshots = [
-    { src: "/screenshots/shot1.png", label: "[01] CIRCUIT 01: OVERPASS BRIDGE & RAMP" },
-    { src: "/screenshots/shot2.png", label: "[02] LIVE 3D SPECTATOR CAMS" },
+    { src: "/screenshots/ChaseCamOverlay.png", label: "[01] CIRCUIT 01: OVERPASS BRIDGE & RAMP" },
+    { src: "/screenshots/SVG showcase.png", label: "[02] LIVE 3D SPECTATOR CAMS" },
   ];
 
   const scrollToSection = (id) => {
