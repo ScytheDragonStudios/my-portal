@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 
 export default function VectorKarts({ onBack, isBroken }) {
-    const [lightboxImg, setLightboxImg] = useState(null);
+  const [lightboxImg, setLightboxImg] = useState(null);
 
-    const screenshots = [
-        { src: "/screenshots/ChaseCamOverlay.png", label: "[01] CIRCUIT 01: Overpass Bridge and Ramp from Chase cam"},
-        { src: "/screenshots/SVG showcase.png", label: "[02] Live 3D SVG Character Showcase"},
-    ];
+  const screenshots = [
+    { src: "/screenshots/shot1.png", label: "[01] CIRCUIT 01: OVERPASS BRIDGE & RAMP" },
+    { src: "/screenshots/shot2.png", label: "[02] LIVE 3D SPECTATOR CAMS" },
+  ];
 
-    return (
-        <div className="relative z-10 max-w-5xl w-full text-left space-y-12 py-6">
-            {/* Top Navigation */}
-            <nav className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800 pb-4 font-mono">
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <div className="relative z-10 max-w-5xl w-full text-left space-y-12 py-6">
+      {/* Top Navigation Bar */}
+      <nav className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800 pb-4 font-mono">
         <button
           onClick={onBack}
           className={`text-sm font-bold tracking-widest uppercase cursor-pointer transition-colors ${
             isBroken ? "text-red-500 hover:text-white" : "text-cyan-400 hover:text-white"
           }`}
         >
-          &larr; Return to Streamer Portal
+          &larr; Return to Stone Akuma Portal
         </button>
         <div className="text-xs tracking-[0.2em] text-zinc-500 uppercase">
           Developed by <span className="text-zinc-200 font-bold">ScytheDragon Studios</span> // Audio by{" "}
@@ -43,27 +50,27 @@ export default function VectorKarts({ onBack, isBroken }) {
           streamers, VTubers, and indie game tribute circuits.
         </p>
         <div className="pt-4 flex flex-wrap justify-center gap-4 font-mono text-xs">
-          <a
-            href="#roster"
-            className={`px-6 py-3 font-bold uppercase tracking-widest transition-all ${
+          <button
+            onClick={() => scrollToSection("roster")}
+            className={`px-6 py-3 font-bold uppercase tracking-widest transition-all cursor-pointer ${
               isBroken
                 ? "bg-red-600 text-white hover:bg-red-500"
                 : "bg-cyan-400 text-black hover:bg-white shadow-[0_0_20px_rgba(34,211,238,0.35)]"
             }`}
           >
             Confirmed Creator Roster
-          </a>
-          <a
-            href="#multiplayer"
-            className="px-6 py-3 font-bold uppercase tracking-widest border border-zinc-700 bg-zinc-900/80 text-zinc-200 hover:border-cyan-400 hover:text-cyan-400 transition-all"
+          </button>
+          <button
+            onClick={() => scrollToSection("multiplayer")}
+            className="px-6 py-3 font-bold uppercase tracking-widest border border-zinc-700 bg-zinc-900/80 text-zinc-200 hover:border-cyan-400 hover:text-cyan-400 transition-all cursor-pointer"
           >
             Multiplayer Teaser
-          </a>
+          </button>
         </div>
       </header>
 
       {/* 1. In-Engine Screenshots Section */}
-      <section id="screenshots" className="space-y-6">
+      <section id="screenshots" className="space-y-6 scroll-mt-24">
         <div className="border-l-2 border-cyan-400 pl-4">
           <h2 className="text-2xl font-black tracking-wider uppercase text-white">In-Engine Captures</h2>
           <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
@@ -100,7 +107,7 @@ export default function VectorKarts({ onBack, isBroken }) {
       </section>
 
       {/* 2. Confirmed Featured Creators Roster */}
-      <section id="roster" className="space-y-6">
+      <section id="roster" className="space-y-6 scroll-mt-24">
         <div className="border-l-2 border-cyan-400 pl-4">
           <h2 className="text-2xl font-black tracking-wider uppercase text-white">Confirmed Featured Creators</h2>
           <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
@@ -141,7 +148,7 @@ export default function VectorKarts({ onBack, isBroken }) {
               </svg>
             </div>
             <h3 className="font-bold text-blue-400 tracking-wider text-sm">RIME REAPER</h3>
-            <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured Vtuber // Lich</p>
+            <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured VTuber // Lich</p>
           </div>
 
           {/* Lumikki-la-lune */}
@@ -162,7 +169,7 @@ export default function VectorKarts({ onBack, isBroken }) {
             <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured VTuber // Snow Kitsune</p>
           </div>
 
-          {/* Kiyokami */}
+          {/* White Tiger / Birthday Racer */}
           <div className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-pink-400 transition-all">
             <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded">
               <svg viewBox="0 0 100 120" className="w-full h-full">
@@ -176,8 +183,8 @@ export default function VectorKarts({ onBack, isBroken }) {
                 <path fill="#2968ff" d="M 35 36 L 44 36 L 43 41 L 36 41 Z M 65 36 L 56 36 L 57 41 L 64 41 Z" />
               </svg>
             </div>
-            <h3 className="font-bold text-pink-300 tracking-wider text-sm">Kiyokami</h3>
-            <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured Vtuber // Turbo Manul Neko</p>
+            <h3 className="font-bold text-pink-300 tracking-wider text-sm">WHITE TIGER</h3>
+            <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured Vtuber // Turbo Manul</p>
           </div>
         </div>
       </section>
@@ -185,7 +192,7 @@ export default function VectorKarts({ onBack, isBroken }) {
       {/* 3. Multiplayer & Spectator Mode Roadmap Teaser */}
       <section
         id="multiplayer"
-        className={`border p-6 md:p-8 space-y-6 ${
+        className={`border p-6 md:p-8 space-y-6 scroll-mt-24 ${
           isBroken ? "border-red-600 bg-red-950/15" : "border-zinc-800 bg-zinc-900/40"
         }`}
       >
@@ -197,7 +204,7 @@ export default function VectorKarts({ onBack, isBroken }) {
             Online Multiplayer &amp; Live Broadcast Spectating
           </h2>
           <p className="text-sm text-zinc-400 font-mono">
-            ScytheDragon Studios is expanding Vector Karts beyond solo EnemyAI Grand Prix races into a zero-cost,
+            ScytheDragon Studios is expanding Vector Karts beyond solo AI Grand Prix races into a zero-cost,
             community-driven party racer built for streamer lobbies and tournament nights.
           </p>
         </div>
@@ -235,7 +242,7 @@ export default function VectorKarts({ onBack, isBroken }) {
         <p className="text-xs text-zinc-400 max-w-2xl mx-auto leading-relaxed">
           Every creator avatar in Vector Karts is built with signed permission under our mutual No-AI Rider. We never
           clone performer voices with AI or scrape reference art into generative models. All 3D SVG meshes are
-          hand-plotted in Inkscape and all character voice packs are 100% authentic human recordings.
+          hand-plotted in Inkscape 1.4.4 and all character voice packs are 100% authentic human recordings.
         </p>
         <div className="pt-2">
           <a
