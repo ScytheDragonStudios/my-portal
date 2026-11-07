@@ -98,7 +98,7 @@ export default function VectorKarts({ onBack, isBroken }) {
             Patreon Backer
           </a>
           <a
-            href="https://stoneakuma.itch.io/vector-karts"
+            href="https://stoneakuma.itch.io"
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest border border-emerald-400 text-emerald-300 hover:bg-emerald-500 hover:text-black transition-all no-underline"
@@ -108,7 +108,7 @@ export default function VectorKarts({ onBack, isBroken }) {
         </div>
       </section>
 
-      {/* 1. In-Engine Screenshots Section */}
+      {/* In-Engine Screenshots Section */}
       <section id="screenshots" className="space-y-6 scroll-mt-24">
         <div className="border-l-2 border-cyan-400 pl-4">
           <h2 className="text-2xl font-black tracking-wider uppercase text-white">In-Engine Captures</h2>
@@ -145,7 +145,7 @@ export default function VectorKarts({ onBack, isBroken }) {
         </div>
       </section>
 
-      {/* 2. Confirmed Featured Creators Roster */}
+      {/* Confirmed Featured Creators Roster */}
       <section id="roster" className="space-y-6 scroll-mt-24">
         <div className="border-l-2 border-cyan-400 pl-4">
           <h2 className="text-2xl font-black tracking-wider uppercase text-white">Confirmed Featured Creators</h2>
@@ -208,7 +208,7 @@ export default function VectorKarts({ onBack, isBroken }) {
             <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured VTuber // Snow Kitsune</p>
           </div>
 
-          {/* White Tiger / Birthday Racer */}
+          {/* Kiyokami */}
           <div className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-pink-400 transition-all">
             <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded">
               <svg viewBox="0 0 100 120" className="w-full h-full">
@@ -228,7 +228,7 @@ export default function VectorKarts({ onBack, isBroken }) {
         </div>
       </section>
 
-      {/* 3. Multiplayer & Spectator Mode Roadmap Teaser */}
+      {/* Multiplayer & Spectator Mode Roadmap Teaser */}
       <section
         id="multiplayer"
         className={`border p-6 md:p-8 space-y-6 scroll-mt-24 ${
@@ -273,7 +273,7 @@ export default function VectorKarts({ onBack, isBroken }) {
         </div>
       </section>
 
-      {/* 4. Human Artistry & No-AI Rider Pledge */}
+      {/* Human Artistry & No-AI Rider Pledge */}
       <section className="border border-red-900/60 bg-red-950/10 p-6 text-center space-y-4 font-mono">
         <h3 className="text-sm font-bold tracking-[0.2em] text-red-400 uppercase">
           [ SCYTHEDRAGON STUDIOS // HUMAN ARTISTRY &amp; NO-AI RIDER PLEDGE ]
