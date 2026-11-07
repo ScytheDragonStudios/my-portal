@@ -25,7 +25,7 @@ export default function VectorKarts({ onBack, isBroken }) {
             isBroken ? "text-red-500 hover:text-white" : "text-cyan-400 hover:text-white"
           }`}
         >
-          &larr; Return to Stone Akuma Portal
+          &larr; Return to Streamer Portal
         </button>
         <div className="text-xs tracking-[0.2em] text-zinc-500 uppercase">
           Developed by <span className="text-zinc-200 font-bold">ScytheDragon Studios</span> // Audio by{" "}
@@ -68,6 +68,45 @@ export default function VectorKarts({ onBack, isBroken }) {
           </button>
         </div>
       </header>
+
+      {/* SUPPORT THE DEV JOURNEY BANNER */}
+      <section className="border border-amber-500/40 bg-amber-950/15 p-6 md:p-8 rounded-lg text-center space-y-4 font-mono">
+        <span className="text-xs tracking-[0.3em] uppercase text-amber-400 font-bold">
+          // BACK THE PROJECT //
+        </span>
+        <h3 className="text-xl md:text-2xl font-black uppercase tracking-wider text-white">
+          Want to help support the game dev journey?
+        </h3>
+        <p className="text-xs text-zinc-400 max-w-xl mx-auto leading-relaxed">
+          Every bit of support helps fund community asset licenses, future track building, and upcoming creator onboarding sessions. Grab the playable demo or back the journey below!
+        </p>
+        <div className="pt-2 flex flex-wrap justify-center gap-4">
+          <a
+            href="https://ko-fi.com/stoneakuma"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest bg-amber-500 text-black hover:bg-white transition-all no-underline shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+          >
+            ☕ Support on Ko-fi
+          </a>
+          <a
+            href="https://patreon.com/stoneakuma"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest bg-red-500 text-white hover:bg-red-400 transition-all no-underline shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+          >
+            Patreon Backer
+          </a>
+          <a
+            href="https://stoneakuma.itch.io/vector-karts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest border border-emerald-400 text-emerald-300 hover:bg-emerald-500 hover:text-black transition-all no-underline"
+          >
+            📥 Itch.io Demo Page
+          </a>
+        </div>
+      </section>
 
       {/* 1. In-Engine Screenshots Section */}
       <section id="screenshots" className="space-y-6 scroll-mt-24">
@@ -183,7 +222,7 @@ export default function VectorKarts({ onBack, isBroken }) {
                 <path fill="#2968ff" d="M 35 36 L 44 36 L 43 41 L 36 41 Z M 65 36 L 56 36 L 57 41 L 64 41 Z" />
               </svg>
             </div>
-            <h3 className="font-bold text-pink-300 tracking-wider text-sm">WHITE TIGER</h3>
+            <h3 className="font-bold text-pink-300 tracking-wider text-sm">Kiyokami</h3>
             <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured Vtuber // Turbo Manul</p>
           </div>
         </div>
@@ -204,7 +243,7 @@ export default function VectorKarts({ onBack, isBroken }) {
             Online Multiplayer &amp; Live Broadcast Spectating
           </h2>
           <p className="text-sm text-zinc-400 font-mono">
-            ScytheDragon Studios is expanding Vector Karts beyond solo AI Grand Prix races into a zero-cost,
+            ScytheDragon Studios is expanding Vector Karts beyond solo EnemyAI Grand Prix races into a zero-cost,
             community-driven party racer built for streamer lobbies and tournament nights.
           </p>
         </div>
