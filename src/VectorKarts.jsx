@@ -2,11 +2,61 @@ import React, { useState } from "react";
 
 export default function VectorKarts({ onBack, isBroken }) {
   const [lightboxImg, setLightboxImg] = useState(null);
+  const [selectedRacer, setSelectedRacer] = useState(null);
 
   const screenshots = [
     { src: "/screenshots/ChaseCamOverlay.png", label: "[01] CIRCUIT 01: OVERPASS BRIDGE & RAMP" },
     { src: "/screenshots/SVG showcase.png", label: "[02] LIVE 3D SPECTATOR CAMS" },
   ];
+
+  // Racer Lore & Bio Data Dossiers
+  const racerBios = {
+    stone_akuma: {
+      name: "STONE AKUMA",
+      title: "Lead (Solo) Dev // Eldritch Technomancer",
+      color: "text-red-500",
+      borderColor: "border-red-500",
+      stats: { speed: "90%", accel: "75%", drift: "88%" },
+      special: "★ SPECIAL: OMNICIDE GAZE — Inverts the steering controls of all rivals on the track for 8 seconds.",
+      lore: "The Architect.  Torn from the dreams of Azazoth, a villain without a purpose, so he became The Creator.  He creates connections and twists them to suit his ambitions, be they Game Dev, Music, or Content Creation."
+    },
+    rime: {
+      name: "RIME REAPER",
+      title: "Featured Content Creator // Lich",
+      color: "text-blue-400",
+      borderColor: "border-blue-500",
+      stats: { speed: "80%", accel: "95%", drift: "82%" },
+      special: "★ SPECIAL: BONE CATHEDRALS — Erupts 42 jagged white bone spires randomly across the track. Rime is 100% immune, while rivals spin out on impact.",
+      lore: "A lich, supposedly bound in ice for all eternity has been unthawed. Time to spare and rubber to burn, he has something to prove."
+    },
+    lumi: {
+      name: "LUMIKKI-LA-LUNE",
+      title: "Featured VTuber // Snow Kitsune",
+      color: "text-cyan-400",
+      borderColor: "border-cyan-400",
+      stats: { speed: "85%", accel: "88%", drift: "92%" },
+      special: "★ SPECIAL: FROST TRAGEDY — Summons a 3D falling snowstorm that freezes all unshielded rivals solid for 8 seconds.",
+      lore: "The Fox from the Moon, with a brush and a tune.  Not afraid to show they can dish as much as they can take, just don't tell them to step on the brake."
+    },
+    white_tiger: {
+      name: "KIYOKAMI",
+      title: "Featured VTuber // Turbo Manul",
+      color: "text-pink-300",
+      borderColor: "border-pink-400",
+      stats: { speed: "92%", accel: "88%", drift: "94%" },
+      special: "★ SPECIAL: ",
+      lore: " "
+    },
+    fwoggy: {
+      name: "FROGGY",
+      title: "Featured Creator // Weird Frog Girl from Ohio",
+      color: "text-lime-400",
+      borderColor: "border-lime-500",
+      stats: { speed: "86%", accel: "93%", drift: "90%" },
+      special: "★ SPECIAL: HICCUPOPOCALYPSE - ",
+      lore: " "
+    }
+  };
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -134,9 +184,6 @@ export default function VectorKarts({ onBack, isBroken }) {
                   e.currentTarget.style.display = "none";
                 }}
               />
-              <span className="text-xs font-mono text-zinc-600 absolute pointer-events-none">
-                [Drop {shot.src} in public folder]
-              </span>
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/80 to-transparent p-3 font-mono text-[11px] text-cyan-400 tracking-wider">
                 {shot.label}
               </div>
@@ -145,19 +192,27 @@ export default function VectorKarts({ onBack, isBroken }) {
         </div>
       </section>
 
-      {/* Confirmed Featured Creators Roster */}
+      {/* Confirmed Featured Creators Roster (Click for Lore Bio) */}
       <section id="roster" className="space-y-6 scroll-mt-24">
-        <div className="border-l-2 border-cyan-400 pl-4">
-          <h2 className="text-2xl font-black tracking-wider uppercase text-white">Confirmed Featured Creators</h2>
-          <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
-            // Hand-Crafted Multi-Layer Low-Poly SVG Pilots
-          </p>
+        <div className="border-l-2 border-cyan-400 pl-4 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 className="text-2xl font-black tracking-wider uppercase text-white">Confirmed Featured Creators</h2>
+            <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
+              // Click any pilot card to view full bio &amp; lore dossier
+            </p>
+          </div>
+          <span className="font-mono text-xs text-cyan-400 bg-cyan-950/40 px-3 py-1 border border-cyan-500/30">
+            FULL LINEUP ACTIVE
+          </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {/* Stone Akuma */}
-          <div className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-red-500 transition-all">
-            <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded">
+          <div
+            onClick={() => setSelectedRacer("stone_akuma")}
+            className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-red-500 transition-all cursor-pointer group"
+          >
+            <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded group-hover:scale-105 transition-transform">
               <svg viewBox="0 0 100 120" className="w-full h-full">
                 <path fill="#121318" d="M 14 60 L 36 53 L 64 53 L 86 60 L 82 116 L 18 116 Z" />
                 <path fill="#f4f6fa" d="M 37 52 L 63 52 L 58 98 L 50 108 L 42 98 Z" />
@@ -171,11 +226,17 @@ export default function VectorKarts({ onBack, isBroken }) {
             </div>
             <h3 className="font-bold text-red-500 tracking-wider text-sm">STONE AKUMA</h3>
             <p className="text-[11px] font-mono text-zinc-500 mt-1">Lead Dev // Eldritch Technomancer</p>
+            <span className="inline-block mt-2 font-mono text-[10px] text-cyan-400 uppercase tracking-widest group-hover:underline">
+              [View Dossier &rarr;]
+            </span>
           </div>
 
           {/* Rime Reaper */}
-          <div className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-blue-500 transition-all">
-            <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded">
+          <div
+            onClick={() => setSelectedRacer("rime")}
+            className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-blue-500 transition-all cursor-pointer group"
+          >
+            <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded group-hover:scale-105 transition-transform">
               <svg viewBox="0 0 100 120" className="w-full h-full">
                 <path fill="#242730" d="M 32 9 L 50 5 L 68 9 L 76 28 L 74 47 L 88 55 L 92 106 L 83 116 L 76 105 L 68 117 L 60 106 L 50 118 L 40 106 L 32 117 L 24 105 L 17 116 L 8 106 L 12 55 L 26 47 L 24 28 Z" />
                 <path fill="#08090c" d="M 33 14 L 50 11 L 67 14 L 69 47 L 31 47 Z" />
@@ -188,11 +249,17 @@ export default function VectorKarts({ onBack, isBroken }) {
             </div>
             <h3 className="font-bold text-blue-400 tracking-wider text-sm">RIME REAPER</h3>
             <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured VTuber // Lich</p>
+            <span className="inline-block mt-2 font-mono text-[10px] text-cyan-400 uppercase tracking-widest group-hover:underline">
+              [View Dossier &rarr;]
+            </span>
           </div>
 
           {/* Lumikki-la-lune */}
-          <div className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-cyan-400 transition-all">
-            <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded">
+          <div
+            onClick={() => setSelectedRacer("lumi")}
+            className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-cyan-400 transition-all cursor-pointer group"
+          >
+            <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded group-hover:scale-105 transition-transform">
               <svg viewBox="0 0 100 120" className="w-full h-full">
                 <path fill="#eef6fa" d="M 50 18 L 74 7 L 78 28 L 50 24 L 22 28 L 26 7 Z" />
                 <path fill="#1b326b" d="M 28 22 L 16 20 L 10 32 L 12 52 L 6 68 L 12 76 L 20 72 L 18 64 L 22 50 L 20 34 Z M 72 22 L 84 20 L 90 32 L 88 52 L 94 68 L 88 76 L 80 72 L 82 64 L 78 50 L 80 34 Z" />
@@ -206,11 +273,17 @@ export default function VectorKarts({ onBack, isBroken }) {
             </div>
             <h3 className="font-bold text-cyan-400 tracking-wider text-sm">LUMIKKI-LA-LUNE</h3>
             <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured VTuber // Snow Kitsune</p>
+            <span className="inline-block mt-2 font-mono text-[10px] text-cyan-400 uppercase tracking-widest group-hover:underline">
+              [View Dossier &rarr;]
+            </span>
           </div>
 
           {/* Kiyokami */}
-          <div className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-pink-400 transition-all">
-            <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded">
+          <div
+            onClick={() => setSelectedRacer("white_tiger")}
+            className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-pink-400 transition-all cursor-pointer group"
+          >
+            <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded group-hover:scale-105 transition-transform">
               <svg viewBox="0 0 100 120" className="w-full h-full">
                 <path fill="#dfe2eb" d="M 30 16 L 70 16 L 84 62 L 78 104 L 68 96 L 32 96 L 22 104 L 16 62 Z" />
                 <path fill="#f0f2f7" d="M 28 24 L 22 12 L 28 8 L 40 15 Z M 72 24 L 78 12 L 72 8 L 60 15 Z" />
@@ -222,52 +295,90 @@ export default function VectorKarts({ onBack, isBroken }) {
                 <path fill="#2968ff" d="M 35 36 L 44 36 L 43 41 L 36 41 Z M 65 36 L 56 36 L 57 41 L 64 41 Z" />
               </svg>
             </div>
-            <h3 className="font-bold text-pink-300 tracking-wider text-sm">Kiyokami</h3>
-            <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured Vtuber // Turbo Manul</p>
+            <h3 className="font-bold text-pink-300 tracking-wider text-sm">KIYOKAMI</h3>
+            <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured VTuber // Manul Magical Girl</p>
+            <span className="inline-block mt-2 font-mono text-[10px] text-cyan-400 uppercase tracking-widest group-hover:underline">
+              [View Dossier &rarr;]
+            </span>
+          </div>
+
+          {/* Froggy */}
+          <div
+            onClick={() => setSelectedRacer("fwoggy")}
+            className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-lime-400 transition-all cursor-pointer group"
+          >
+            <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded group-hover:scale-105 transition-transform">
+              <svg viewBox="0 0 100 120" className="w-full h-full">
+                <path fill="#848f4b" d="M 22 52 L 78 52 L 84 118 L 16 118 Z" />
+                <path fill="#8f9c52" d="M 24 58 L 6 44 L 14 25 L 28 36 L 26 52 Z M 76 58 L 94 44 L 86 25 L 72 36 L 74 52 Z" />
+                <path fill="#96a358" d="M 24 26 L 38 14 L 62 14 L 76 26 L 78 46 L 64 56 L 36 56 L 22 46 Z" />
+                <path fill="#f2f0ea" d="M 35 55 L 65 55 L 72 86 L 68 118 L 32 118 L 28 86 Z" />
+                <path fill="#ffffff" d="M 22 24 L 21 15 L 29 10 L 36 16 L 33 25 Z M 78 24 L 79 15 L 71 10 L 64 16 L 67 25 Z" />
+                <path fill="#181a1f" d="M 25 23 L 24 16 L 30 13 L 34 18 L 32 23 Z M 75 23 L 76 16 L 70 13 L 66 18 L 68 23 Z" />
+                <path fill="#ebb854" d="M 27 34 L 40 26 L 60 26 L 73 34 L 69 37 L 50 31 L 31 37 Z" />
+              </svg>
+            </div>
+            <h3 className="font-bold text-lime-400 tracking-wider text-sm">FROGGY</h3>
+            <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured Creator // Weird Frog Girl</p>
+            <span className="inline-block mt-2 font-mono text-[10px] text-cyan-400 uppercase tracking-widest group-hover:underline">
+              [View Dossier &rarr;]
+            </span>
           </div>
         </div>
       </section>
 
-      {/* Multiplayer & Spectator Mode Roadmap Teaser */}
+      {/* Multiplayer & Spectator Mode Roadmap Teaser (With Completion Progress Bar) */}
       <section
         id="multiplayer"
         className={`border p-6 md:p-8 space-y-6 scroll-mt-24 ${
-          isBroken ? "border-red-600 bg-red-950/15" : "border-zinc-800 bg-zinc-900/40"
+          isBroken ? "border-red-600 bg-red-950/15" : "border-cyan-500/40 bg-zinc-900/40 shadow-[0_0_25px_rgba(34,211,238,0.15)]"
         }`}
       >
-        <div className="space-y-2">
-          <span className="text-[11px] font-mono tracking-[0.25em] uppercase text-amber-400">
-            // PHASE 2 ROADMAP TEASER //
-          </span>
+        <div className="space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-[11px] font-mono tracking-[0.25em] uppercase text-cyan-400 font-bold">
+              // ONLINE MULTI-LOBBY &amp; SPECTATOR SYSTEM //
+            </span>
+            <span className="font-mono text-xs text-emerald-400 bg-emerald-950/60 px-3 py-1 border border-emerald-500/40 font-bold">
+              STATUS: 100% COMPLETE &amp; OPERATIONAL
+            </span>
+          </div>
           <h2 className="text-2xl md:text-3xl font-black uppercase tracking-wider text-white">
             Online Multiplayer &amp; Live Broadcast Spectating
           </h2>
           <p className="text-sm text-zinc-400 font-mono">
-            ScytheDragon Studios is expanding Vector Karts beyond solo EnemyAI Grand Prix races into a zero-cost,
-            community-driven party racer built for streamer lobbies and tournament nights.
+            Online real-time multiplayer relay lobbies, synchronized 3-2-1 starting grid countdowns, and 100ms client-side interpolation buffers are fully live and operational, Demo side too.
           </p>
+          
+          {/* Progress Bar Component */}
+          <div className="space-y-1 font-mono pt-2">
+            <div className="flex justify-between text-xs text-zinc-400">
+              <span>MULTIPLAYER DEVELOPMENT MILESTONE</span>
+              <span className="text-cyan-400 font-bold">100% COMPLETE</span>
+            </div>
+            <div className="w-full h-3 bg-zinc-950 border border-zinc-700 rounded-sm overflow-hidden p-0.5">
+              <div className="h-full bg-gradient-to-r from-cyan-500 to-emerald-400 shadow-[0_0_12px_rgba(34,211,238,0.6)] w-full transition-all"></div>
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono pt-2">
           <div className="border border-zinc-800 bg-black/60 p-4 space-y-2">
-            <h3 className="text-cyan-400 font-bold text-sm">01 // P2P RELAYED LOBBIES</h3>
+            <h3 className="text-cyan-400 font-bold text-sm">01 // SOCKET.IO RELAY LOBBIES</h3>
             <p className="text-xs text-zinc-400">
-              Instant room codes over relayed peer-to-peer netcode—protecting streamer IP addresses with zero port
-              forwarding required.
+              Instant room codes and public room lists allow players to host and join custom 1v1 up to 6-racer online grids seamlessly.
             </p>
           </div>
           <div className="border border-zinc-800 bg-black/60 p-4 space-y-2">
-            <h3 className="text-cyan-400 font-bold text-sm">02 // LIVE SPECTATOR DRONE CAM</h3>
+            <h3 className="text-cyan-400 font-bold text-sm">02 // 360° LIVE SPECTATOR DRONE CAM</h3>
             <p className="text-xs text-zinc-400">
-              Drop into public lobbies using the weighted 360° 3rd-person spectator camera to cast community tournaments
-              live on stream.
+              Drop into active rooms as a live spectator to follow racers with weighted smooth camera tracking and tab-cycling.
             </p>
           </div>
           <div className="border border-zinc-800 bg-black/60 p-4 space-y-2">
-            <h3 className="text-cyan-400 font-bold text-sm">03 // INDIE TRIBUTE CIRCUITS</h3>
+            <h3 className="text-cyan-400 font-bold text-sm">03 // 100ms INTERPOLATION BUFFER</h3>
             <p className="text-xs text-zinc-400">
-              New tracks paying homage to fellow indie games, paired with original dark electronic soundtracks produced
-              by Cipher &amp; Coil.
+              Silky smooth remote peer movement eliminates rubber-banding and network jitter across multiple browser windows.
             </p>
           </div>
         </div>
@@ -304,6 +415,76 @@ export default function VectorKarts({ onBack, isBroken }) {
             alt="Enlarged Screenshot"
             className="max-w-full max-h-[88vh] border-2 border-cyan-400 shadow-[0_0_35px_rgba(34,211,238,0.4)]"
           />
+        </div>
+      )}
+
+      {/* RACER LORE DOSSIER POPUP MODAL */}
+      {selectedRacer && racerBios[selectedRacer] && (
+        <div
+          onClick={() => setSelectedRacer(null)}
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className={`max-w-xl w-full bg-zinc-950 border-2 ${racerBios[selectedRacer].borderColor} p-6 md:p-8 rounded-lg shadow-[0_0_50px_rgba(0,255,255,0.25)] font-mono space-y-6 relative cursor-default`}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedRacer(null)}
+              className="absolute top-4 right-4 text-zinc-400 hover:text-white text-lg font-bold px-2 py-1 border border-zinc-700 bg-zinc-900 cursor-pointer"
+            >
+              [X]
+            </button>
+
+            {/* Header */}
+            <div className="border-b border-zinc-800 pb-4 space-y-1">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-zinc-500">// PILOT DOSSIER //</span>
+              <h3 className={`text-2xl md:text-3xl font-black uppercase tracking-wider ${racerBios[selectedRacer].color}`}>
+                {racerBios[selectedRacer].name}
+              </h3>
+              <p className="text-xs text-zinc-400">{racerBios[selectedRacer].title}</p>
+            </div>
+
+            {/* Stat Bars */}
+            <div className="grid grid-cols-3 gap-3 bg-zinc-900/60 p-4 border border-zinc-800 text-center">
+              <div>
+                <span className="text-[10px] text-zinc-500 block">SPEED</span>
+                <span className="text-sm font-bold text-white">{racerBios[selectedRacer].stats.speed}</span>
+              </div>
+              <div>
+                <span className="text-[10px] text-zinc-500 block">ACCEL</span>
+                <span className="text-sm font-bold text-white">{racerBios[selectedRacer].stats.accel}</span>
+              </div>
+              <div>
+                <span className="text-[10px] text-zinc-500 block">DRIFT</span>
+                <span className="text-sm font-bold text-white">{racerBios[selectedRacer].stats?.drift || racerBios[selectedRacer].stats.drift}</span>
+              </div>
+            </div>
+
+            {/* Special Ability Box */}
+            <div className="bg-cyan-950/20 border border-cyan-500/40 p-4 space-y-1">
+              <span className="text-[10px] uppercase text-cyan-400 font-bold tracking-widest">SIGNATURE ABILITY</span>
+              <p className="text-xs text-cyan-200 leading-relaxed font-bold">{racerBios[selectedRacer].special}</p>
+            </div>
+
+            {/* Lore Bio */}
+            <div className="space-y-2">
+              <span className="text-[10px] uppercase text-zinc-500 tracking-widest">BACKGROUND LORE</span>
+              <p className="text-xs text-zinc-300 leading-relaxed">{racerBios[selectedRacer].lore}</p>
+            </div>
+
+            {/* Footer Action */}
+            <div className="pt-2 text-center">
+              <button
+                onClick={() => setSelectedRacer(null)}
+                className={`w-full py-3 text-xs font-bold uppercase tracking-widest transition-all cursor-pointer ${
+                  selectedRacer === "stone_akuma" ? "bg-red-600 text-white hover:bg-red-500" : "bg-cyan-400 text-black hover:bg-white"
+                }`}
+              >
+                Close Dossier
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
