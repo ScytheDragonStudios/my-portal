@@ -248,7 +248,7 @@ export default function VectorKarts({ onBack, isBroken }) {
               </svg>
             </div>
             <h3 className="font-bold text-blue-400 tracking-wider text-sm">RIME REAPER</h3>
-            <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured VTuber // Lich</p>
+            <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured Creator|VTuber // Lich</p>
             <span className="inline-block mt-2 font-mono text-[10px] text-cyan-400 uppercase tracking-widest group-hover:underline">
               [View Dossier &rarr;]
             </span>
