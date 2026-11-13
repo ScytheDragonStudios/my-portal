@@ -44,7 +44,7 @@ export default function VectorKarts({ onBack, isBroken }) {
       color: "text-pink-300",
       borderColor: "border-pink-400",
       stats: { speed: "92%", accel: "88%", drift: "94%" },
-      special: "★ SPECIAL: ",
+      special: "★ SPECIAL: MEEWO SPECIAL - Summons giant cat paws directly along the track to knock back rival racers for 8 seconds",
       lore: " "
     },
     fwoggy: {
