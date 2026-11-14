@@ -40,21 +40,48 @@ export default function VectorKarts({ onBack, isBroken }) {
     },
     white_tiger: {
       name: "KIYOKAMI",
-      title: "Featured VTuber // Turbo Manul",
+      title: "Featured VTuber // Magical Girl Manul",
       color: "text-pink-300",
       borderColor: "border-pink-400",
       stats: { speed: "92%", accel: "88%", drift: "94%" },
       special: "★ SPECIAL: MEEWO SPECIAL - Summons giant cat paws directly along the track to knock back rival racers for 8 seconds",
-      lore: " "
+      lore: "A Pallas Kitty turned Magical Girl.  She was picked to protect Humanity by saving hearts from monsters, today she's kicking ass and taking names on the track!"
     },
     fwoggy: {
-      name: "FROGGY",
+      name: "Froggy",
       title: "Featured Creator // Weird Frog Girl from Ohio",
       color: "text-lime-400",
       borderColor: "border-lime-500",
       stats: { speed: "86%", accel: "93%", drift: "90%" },
-      special: "★ SPECIAL: HICCUPOPOCALYPSE - ",
-      lore: " "
+      special: "★ SPECIAL: HICCUPOPOCALYPSE - Mothman randomly swoops down and picks up a racer to drag off the track, racer reappers at a random space on the track.",
+      lore: "A weird frog girl from Ohio (Their words). Obsessed with Frogs, Beat Saber, and Mothman.  THEY WILL FIND HIM. MARK THEIR WORDS. "
+    },
+    bread: {
+    name: "Bread",
+    title: "Featured Creator // Computer Worm",
+    color: "text-orange-400",
+    borderColor: "border-orange-500",
+    stats: { speed: "87%", accel: "90%", drift: "88%" },
+    special: "★ SPECIAL: BREADDAGEDDON - (temp) Drop loaves of bread onto the track that explode, any racer touched by an explosion is sent flying to a random part of the map",
+    lore: "A sentient computer virus hell-bent on corrupting everything. Tried to join the game in order to corrupt the tracks for funsies.  Very quickly realized that doesn't work."
+    },
+    queen: {
+      name: "KumberQueen",
+      title: "Featured Voice Actor // Cucumber Thingey",
+      color: "text-green-400",
+      borderColor: "border-green-500",
+      stats: { speed: "85%", accel: "85%", drift: "95%" },
+      special: "★ SPECIAL: MOM VOICE - (Temporary) Queen shouts out EVERYONE.  Everyone freezes and if you're unlucky and get it twice, you move backwards.",
+      lore: "Empty text to be filled later."
+    },
+    dia: {
+      name: "Diamond Mistress",
+      title: "Featured Voice Actor // I am not qualified to say",
+      color: "text-mauve-400",
+      borderColor: "border-purple-500",
+      stats: { speed: "75%", accel: "95%", drift: "94%" },
+      special: "★ SPECIAL: ",
+      lore: "Empty text -- pretend it's Latin"
     }
   };
 
@@ -202,7 +229,7 @@ export default function VectorKarts({ onBack, isBroken }) {
             </p>
           </div>
           <span className="font-mono text-xs text-cyan-400 bg-cyan-950/40 px-3 py-1 border border-cyan-500/30">
-            FULL LINEUP ACTIVE
+            MORE RACERS BEING ADDED!!
           </span>
         </div>
 
