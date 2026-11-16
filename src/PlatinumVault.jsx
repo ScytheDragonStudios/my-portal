@@ -1,37 +1,42 @@
 import React, { useState, useEffect } from 'react';
 
 export default function PlatinumVault({ onBack }) {
-    // 1. State to hold live trophy data
-    const [trophies, setTrophies] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [activeFilter, setActiveFilter] = useState('all');
+  const [trophies, setTrophies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('all');
 
-    // 2. Fetch trophy JSON on load
-    useEffect(() => {
-        fetch('replaceWithEndPoint')
-            .then((res) => {
-                if (!res.ok) throw new Error('Failed to load trophy vault data');
-                return res.json();
-            })
-            .then((data) => {
-                //Filter everything except platinum
-                const platinumsOnly = data.filter((t) => t.isPlatinum || t.earnedTrophies?.platinum > 0);
-                setTrophies(platinumsOnly);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.error(err);
-                setError('Unable to connect...');
-                setLoading(false);
-            });
-    }, []);
+  useEffect(() => {
+    // Fetches public/trophies.json (works locally and on GitHub Pages)
+    fetch(`${import.meta.env.BASE_URL}trophies.json`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}: Failed to load trophy vault data`);
+        return res.json();
+      })
+      .then((data) => {
+        // Support both a flat array and raw psn-api { trophyTitles: [...] } output
+        const rawList = Array.isArray(data) ? data : data.trophyTitles || [];
 
-    const filteredTrophies = trophies.filter(
-        (t) => activeFilter === 'all' || (t.category.includes(activeFilter))
-    );
+        const platinumsOnly = rawList.filter(
+          (t) => t.isPlatinum || t.earnedTrophies?.platinum > 0
+        );
 
-return (
+        setTrophies(platinumsOnly);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('PlatinumVault fetch error:', err);
+        setError('Unable to connect to the Platinum Archives...');
+        setLoading(false);
+      });
+  }, []);
+
+  // Optional chaining prevents a crash when a PSN object lacks custom categories
+  const filteredTrophies = trophies.filter(
+    (t) => activeFilter === 'all' || t.category?.includes(activeFilter)
+  );
+
+  return (
     <div style={styles.container}>
       <nav style={styles.nav}>
         <button style={styles.backBtn} onClick={onBack}>
@@ -72,28 +77,31 @@ return (
       {/* Trophy Cards */}
       {!loading && !error && (
         <div style={styles.grid}>
-          {filteredTrophies.map((trophy) => (
-            <div key={trophy.id || trophy.titleName} style={styles.card}>
-              <div style={styles.cardHeader}>
-                <img 
-                  src={trophy.icon || trophy.conceptIconUrl} 
-                  alt={trophy.title || trophy.titleName} 
-                  style={styles.icon} 
-                />
-                <div>
-                  <h3 style={styles.gameTitle}>{trophy.title || trophy.titleName}</h3>
-                  <div style={styles.badge}>🏆 {trophy.trophyName || 'Platinum Achieved'}</div>
+          {filteredTrophies.map((trophy) => {
+            const id = trophy.id || trophy.npCommunicationId || trophy.trophyTitleName || trophy.titleName;
+            const title = trophy.title || trophy.trophyTitleName || trophy.titleName;
+            const icon = trophy.icon || trophy.trophyTitleIconUrl || trophy.conceptIconUrl;
+            const unlockedDate = trophy.date || (trophy.lastUpdatedDateTime ? new Date(trophy.lastUpdatedDateTime).toLocaleDateString() : 'Recorded');
+
+            return (
+              <div key={id} style={styles.card}>
+                <div style={styles.cardHeader}>
+                  <img src={icon} alt={title} style={styles.icon} />
+                  <div>
+                    <h3 style={styles.gameTitle}>{title}</h3>
+                    <div style={styles.badge}>🏆 {trophy.trophyName || 'Platinum Achieved'}</div>
+                  </div>
+                </div>
+                <div style={styles.cardBody}>
+                  <div style={styles.details}>
+                    <span>Unlocked: {unlockedDate}</span>
+                    <span>Rarity: {trophy.rarity || 'Ultra Rare'}</span>
+                  </div>
+                  {trophy.notes && <p style={styles.notes}>"{trophy.notes}"</p>}
                 </div>
               </div>
-              <div style={styles.cardBody}>
-                <div style={styles.details}>
-                  <span>Unlocked: {trophy.date || 'Recorded'}</span>
-                  <span>Rarity: {trophy.rarity || 'Ultra Rare'}</span>
-                </div>
-                {trophy.notes && <p style={styles.notes}>"{trophy.notes}"</p>}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

@@ -27,9 +27,8 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen bg-black bg-gradient-to-b from-black via-zinc-950 to-black text-zinc-100 flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden transition-all duration-1000 ${
-        isBroken ? "reality-broken !via-red-950" : ""
-      }`}
+      className={`min-h-screen bg-black bg-gradient-to-b from-black via-zinc-950 to-black text-zinc-100 flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden transition-all duration-1000 ${isBroken ? "reality-broken !via-red-950" : ""
+        }`}
     >
       {/* ERROR EFFECTS LAYER: Active across all views when reality is broken */}
       {isBroken && (
@@ -63,9 +62,8 @@ export default function App() {
       {/* VIEW 3: MAIN STONE AKUMA PORTAL */}
       {activeView === "portal" && (
         <main
-          className={`relative z-10 max-w-2xl w-full text-center space-y-12 ${
-            isBroken ? "animate-tape-break" : ""
-          }`}
+          className={`relative z-10 max-w-2xl w-full text-center space-y-12 ${isBroken ? "animate-tape-break" : ""
+            }`}
         >
           <section>
             <h1 className="text-7xl font-black tracking-tighter text-white uppercase italic relative group cursor-pointer">
@@ -102,19 +100,17 @@ export default function App() {
             {/* NEW: SCYTHEDRAGON STUDIOS // VECTOR KARTS SHOWCASE BUTTON */}
             <button
               onClick={() => navigateTo("vector-karts")}
-              className={`group p-4 border bg-zinc-900/60 transition-all duration-300 cursor-pointer text-center ${
-                isBroken
+              className={`group p-4 border bg-zinc-900/60 transition-all duration-300 cursor-pointer text-center ${isBroken
                   ? "border-red-600 hover:bg-red-950/30"
                   : "border-cyan-500/50 hover:border-cyan-400"
-              }`}
+                }`}
             >
               <span className="block text-[10px] font-mono tracking-[0.3em] text-cyan-400 uppercase mb-1">
                 // SCYTHEDRAGON STUDIOS FEATURED GAME //
               </span>
               <span
-                className={`text-xl font-black tracking-wider uppercase ${
-                  isBroken ? "group-hover:text-red-500" : "group-hover:text-cyan-400"
-                }`}
+                className={`text-xl font-black tracking-wider uppercase ${isBroken ? "group-hover:text-red-500" : "group-hover:text-cyan-400"
+                  }`}
               >
                 VECTOR KARTS // ROSTER &amp; SCREENSHOTS
               </span>
@@ -123,11 +119,32 @@ export default function App() {
               </p>
             </button>
 
+            {/* PLATINUM VAULT BUTTON */}
+            <button
+              onClick={() => navigateTo("vault")}
+              className={`group p-4 border bg-zinc-900/60 transition-all duration-300 cursor-pointer text-center ${isBroken
+                  ? "border-red-600 hover:bg-red-950/30"
+                  : "border-purple-500/50 hover:border-purple-400"
+                }`}
+            >
+              <span className="block text-[10px] font-mono tracking-[0.3em] text-purple-400 uppercase mb-1">
+    // PLAYSTATION TROPHY ARCHIVES //
+              </span>
+              <span
+                className={`text-xl font-black tracking-wider uppercase ${isBroken ? "group-hover:text-red-500" : "group-hover:text-purple-400"
+                  }`}
+              >
+                PLATINUM VAULT // RELICS &amp; TRIALS
+              </span>
+              <p className="text-xs text-zinc-500 mt-1 font-mono">
+                Conquered Horrors, Physical Trials &amp; 100% Completion Records
+              </p>
+            </button>
+
             {/* Horizontal Stream Icons Container */}
             <div
-              className={`p-4 border border-zinc-800 bg-zinc-900/50 flex flex-col items-center justify-center gap-3 transition-all duration-300 ${
-                isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
-              }`}
+              className={`p-4 border border-zinc-800 bg-zinc-900/50 flex flex-col items-center justify-center gap-3 transition-all duration-300 ${isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
+                }`}
             >
               <span className="text-xs font-mono tracking-[0.3em] text-zinc-500 uppercase">
                 // WATCH LIVE //
@@ -141,9 +158,8 @@ export default function App() {
                   title="Twitch"
                 >
                   <svg
-                    className={`horror-svg ${
-                      isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
-                    }`}
+                    className={`horror-svg ${isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
+                      }`}
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -157,9 +173,8 @@ export default function App() {
                   title="YouTube"
                 >
                   <svg
-                    className={`horror-svg ${
-                      isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
-                    }`}
+                    className={`horror-svg ${isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
+                      }`}
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -173,9 +188,8 @@ export default function App() {
                   title="Kick"
                 >
                   <svg
-                    className={`horror-svg ${
-                      isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
-                    }`}
+                    className={`horror-svg ${isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
+                      }`}
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -187,14 +201,12 @@ export default function App() {
 
             <a
               href="#"
-              className={`group p-4 border border-zinc-800 bg-zinc-900/50 transition-all duration-300 ${
-                isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
-              }`}
+              className={`group p-4 border border-zinc-800 bg-zinc-900/50 transition-all duration-300 ${isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
+                }`}
             >
               <span
-                className={`text-xl font-bold ${
-                  isBroken ? "group-hover:text-red-500" : "group-hover:text-white"
-                }`}
+                className={`text-xl font-bold ${isBroken ? "group-hover:text-red-500" : "group-hover:text-white"
+                  }`}
               >
                 Threadware
               </span>
@@ -207,14 +219,12 @@ export default function App() {
               href="https://github.com/ScytheDragonStudios/my-portal"
               target="_blank"
               rel="noreferrer"
-              className={`group p-4 border border-zinc-800 bg-zinc-900/50 transition-all duration-300 ${
-                isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
-              }`}
+              className={`group p-4 border border-zinc-800 bg-zinc-900/50 transition-all duration-300 ${isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
+                }`}
             >
               <span
-                className={`text-xl font-bold ${
-                  isBroken ? "group-hover:text-red-500" : "group-hover:text-white"
-                }`}
+                className={`text-xl font-bold ${isBroken ? "group-hover:text-red-500" : "group-hover:text-white"
+                  }`}
               >
                 SOURCE CODE // SCYTHEDRAGON STUDIOS
               </span>
@@ -222,9 +232,8 @@ export default function App() {
 
             {/* Music block — Cipher & Coil */}
             <div
-              className={`p-4 border border-zinc-800 bg-zinc-900/50 flex flex-col items-center justify-center gap-3 transition-all duration-300 ${
-                isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
-              }`}
+              className={`p-4 border border-zinc-800 bg-zinc-900/50 flex flex-col items-center justify-center gap-3 transition-all duration-300 ${isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
+                }`}
             >
               <span className="text-xs font-mono tracking-[0.3em] text-zinc-500 uppercase">
                 // CIPHER &amp; COIL MUSIC PRODUCTION //
@@ -238,9 +247,8 @@ export default function App() {
                   title="Spotify"
                 >
                   <svg
-                    className={`horror-svg ${
-                      isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
-                    }`}
+                    className={`horror-svg ${isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
+                      }`}
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -255,9 +263,8 @@ export default function App() {
                   title="SoundCloud"
                 >
                   <svg
-                    className={`horror-svg ${
-                      isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
-                    }`}
+                    className={`horror-svg ${isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
+                      }`}
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -272,9 +279,8 @@ export default function App() {
                   title="Apple Music"
                 >
                   <svg
-                    className={`horror-svg ${
-                      isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
-                    }`}
+                    className={`horror-svg ${isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
+                      }`}
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -289,9 +295,8 @@ export default function App() {
                   title="Amazon Music"
                 >
                   <svg
-                    className={`horror-svg ${
-                      isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
-                    }`}
+                    className={`horror-svg ${isBroken ? "" : "!text-zinc-500 !filter-none hover:!text-white"
+                      }`}
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -303,14 +308,12 @@ export default function App() {
 
             <a
               href="mailto:bfa@cipher-and-coil.com?subject=Business%20Inquiry%20-%20Stone%20Akuma"
-              className={`group p-4 border border-zinc-800 bg-zinc-900/50 transition-all duration-300 ${
-                isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
-              }`}
+              className={`group p-4 border border-zinc-800 bg-zinc-900/50 transition-all duration-300 ${isBroken ? "hover:border-red-600" : "hover:border-zinc-500"
+                }`}
             >
               <span
-                className={`text-xl font-bold ${
-                  isBroken ? "group-hover:text-red-500" : "group-hover:text-white"
-                }`}
+                className={`text-xl font-bold ${isBroken ? "group-hover:text-red-500" : "group-hover:text-white"
+                  }`}
               >
                 CONTACT // EMAIL
               </span>
@@ -327,16 +330,14 @@ export default function App() {
         </label>
         <button
           onClick={() => setIsBroken(!isBroken)}
-          className={`w-14 h-7 rounded-none border p-1 transition-all duration-500 relative cursor-pointer ${
-            isBroken ? "border-red-600 bg-red-950/20" : "border-zinc-800 bg-zinc-950"
-          }`}
+          className={`w-14 h-7 rounded-none border p-1 transition-all duration-500 relative cursor-pointer ${isBroken ? "border-red-600 bg-red-950/20" : "border-zinc-800 bg-zinc-950"
+            }`}
         >
           <div
-            className={`w-4 h-4 transition-all duration-500 ${
-              isBroken
+            className={`w-4 h-4 transition-all duration-500 ${isBroken
                 ? "bg-red-600 translate-x-7 shadow-[0_0_10px_rgba(239,68,68,0.7)]"
                 : "bg-zinc-700 translate-x-0"
-            }`}
+              }`}
           />
         </button>
       </section>
