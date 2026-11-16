@@ -85,7 +85,7 @@
             background: white;
             transform: translateX(-10px);
         }
-        /* Strike 2: Middle jump (The chromatic peak) */
+        /* Strike 2: Middle jump */
         91% {
             clip-path: inset(45% 0 54.5% 0);
             opacity: 1;

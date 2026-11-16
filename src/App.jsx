@@ -97,7 +97,7 @@ export default function App() {
 
           {/* The links grid */}
           <nav className="grid grid-cols-1 gap-4">
-            {/* NEW: SCYTHEDRAGON STUDIOS // VECTOR KARTS SHOWCASE BUTTON */}
+            {/* Showcase Button */}
             <button
               onClick={() => navigateTo("vector-karts")}
               className={`group p-4 border bg-zinc-900/60 transition-all duration-300 cursor-pointer text-center ${isBroken
