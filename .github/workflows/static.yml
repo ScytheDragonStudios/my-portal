@@ -31,10 +31,10 @@ jobs:
         run: npm install
 
     
-       - name: Sync PSN Platinum Trophies
-         env:
+      - name: Sync PSN Platinum Trophies
+        env:
            PSN_NPSSO: ${{ secrets.PSN_NPSSO }}
-         run: node sync-trophies.mjs
+        run: node sync-trophies.mjs
 
       - name: Build with Vite
         run: npm run build
