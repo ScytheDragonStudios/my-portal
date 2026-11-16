@@ -58,7 +58,7 @@ export default function VectorKarts({ onBack, isBroken }) {
     },
     bread: {
     name: "Bread",
-    title: "Featured Creator // Computer Worm",
+    title: "Featured Vtuber // Computer Worm",
     color: "text-orange-400",
     borderColor: "border-orange-500",
     stats: { speed: "87%", accel: "90%", drift: "88%" },
@@ -351,6 +351,32 @@ export default function VectorKarts({ onBack, isBroken }) {
               [View Dossier &rarr;]
             </span>
           </div>
+
+          {/* Bread */}
+       <div
+         onClick={() => setSelectedRacer("bread")}
+         className="border border-zinc-800 bg-zinc-900/50 p-4 text-center hover:border-orange-500 transition-all cursor-pointer group"
+       >
+         <div className="w-28 h-32 mx-auto mb-3 bg-zinc-950 border border-zinc-800 p-2 rounded group-hover:scale-105 transition-transform">
+           <svg viewBox="0 0 100 120" className="w-full h-full">
+             <path fill="#0d1530" d="M 62 64 L 78 60 L 90 74 L 94 98 L 86 116 L 66 116 L 58 92 Z" />
+             <path fill="#424854" d="M 86 100 L 98 94 L 96 106 L 99 114 L 88 118 L 82 112 Z" />
+             <path fill="#3a3d46" d="M 38 18 L 20 22 L 8 42 L 10 68 L 18 76 L 22 72 L 15 64 L 14 44 L 24 27 L 40 23 Z M 62 18 L 80 22 L 92 42 L 90 68 L 82 76 L 78 72 L 85 64 L 86 44 L 76 27 L 60 23 Z" />
+             <path fill="#cfd8e3" d="M 16 74 L 24 70 L 28 77 L 20 81 Z M 84 74 L 76 70 L 72 77 L 80 81 Z" />
+             <path fill="#d8ecff" d="M 50 16 L 67 22 L 69 39 L 60 49 L 50 52 L 40 49 L 32 39 L 33 22 Z" />
+             <path fill="#f4f6fa" d="M 28 56 L 42 54 L 66 48 L 82 52 L 80 88 L 70 88 L 68 116 L 26 116 L 24 90 L 16 88 Z" />
+             <path fill="#ffffff" d="M 50 12 L 70 17 L 76 34 L 71 50 L 65 44 L 67 30 L 33 30 L 35 44 L 29 50 L 24 34 L 30 17 Z" />
+             <path fill="#0038ff" d="M 36 18 L 54 16 L 64 20 L 64 48 L 58 46 L 59 32 L 52 35 L 48 26 L 44 36 L 37 33 L 38 48 L 33 46 Z" />
+             <path fill="#0055ff" d="M 37 36 L 45 36 L 44 42 L 38 42 Z M 63 36 L 55 36 L 56 42 L 62 42 Z" />
+             <path fill="#121318" d="M 48 67 L 59 67 L 59 74 L 54 74 L 54 76 L 58 76 L 58 78 L 54 78 L 54 85 L 57 85 L 57 88 L 52 88 L 52 83 L 47 83 L 47 88 L 44 88 L 44 81 L 39 77 L 39 72 L 42 75 L 46 75 L 46 71 L 48 71 Z" />
+           </svg>
+         </div>
+         <h3 className="font-bold text-orange-400 tracking-wider text-sm">BREAD</h3>
+         <p className="text-[11px] font-mono text-zinc-500 mt-1">Featured Creator // Computer Worm</p>
+         <span className="inline-block mt-2 font-mono text-[10px] text-cyan-400 uppercase tracking-widest group-hover:underline">
+           [View Dossier &rarr;]
+         </span>
+       </div>
         </div>
       </section>
 
@@ -389,7 +415,7 @@ export default function VectorKarts({ onBack, isBroken }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           <div className="border border-zinc-800 bg-black/60 p-4 space-y-2">
             <h3 className="text-cyan-400 font-bold text-sm">01 // SOCKET.IO RELAY LOBBIES</h3>
             <p className="text-xs text-zinc-400">
