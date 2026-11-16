@@ -137,7 +137,7 @@ export default function App() {
                 PLATINUM VAULT // RELICS &amp; TRIALS
               </span>
               <p className="text-xs text-zinc-500 mt-1 font-mono">
-                Conquered Horrors, Physical Trials &amp; 100% Completion Records
+                My Playstation Trophy Vault cause I'm a trophy hunter...somehow.
               </p>
             </button>
 
