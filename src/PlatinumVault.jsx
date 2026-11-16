@@ -43,7 +43,7 @@ export default function PlatinumVault({ onBack }) {
             <header style={styles.header}>
                 <h1 style={styles.title}>Platinum Archives</h1>
                 <p style={styles.subtitle}>
-                    "Conquered horrors, physical trials, and digital torment."
+                    "Conquered Titles"
                 </p>
             </header>
 
