@@ -1,127 +1,174 @@
-import fs from 'fs';
-import dotenv from 'dotenv';
-import {
-  exchangeNpssoForAccessCode,
-  exchangeAccessCodeForAuthTokens,
-  getUserTitles,
-  getUserTrophiesEarnedForTitle,
-  getTitleTrophies
-} from 'psn-api';
+import React, { useState, useEffect } from 'react';
 
-dotenv.config();
+export default function PlatinumVault({ onBack }) {
+    const [trophies, setTrophies] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [activeFilter, setActiveFilter] = useState('all');
 
-const RARITY_LABELS = {
-  0: 'Ultra Rare',
-  1: 'Very Rare',
-  2: 'Rare',
-  3: 'Common'
-};
+    useEffect(() => {
+        fetch(`${import.meta.env.BASE_URL}trophies.json`)
+            .then((res) => {
+                if (!res.ok) throw new Error('Failed to load trophy vault data');
+                return res.json();
+            })
+            .then((data) => {
+                const rawList = Array.isArray(data) ? data : data.trophyTitles || [];
+                const platinumsOnly = rawList.filter((t) => t.isPlatinum || t.earnedTrophies?.platinum > 0);
+                setTrophies(platinumsOnly);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.error(err);
+                setError('Unable to connect to the Platinum Archives...');
+                setLoading(false);
+            });
+    }, []);
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-async function syncPlatinums() {
-  const npsso = process.env.PSN_NPSSO?.trim();
-  if (!npsso) {
-    console.error('Missing PSN_NPSSO in .env file.');
-    process.exit(1);
-  }
-
-  try {
-    console.log('1. Authenticating with PlayStation Network...');
-    const accessCode = await exchangeNpssoForAccessCode(npsso);
-    const authorization = await exchangeAccessCodeForAuthTokens(accessCode);
-
-    console.log('2. Fetching PSN game library...');
-    const response = await getUserTitles(authorization, 'me', { limit: 800 });
-    const allTitles = response.trophyTitles || [];
-
-    const platinumGames = allTitles.filter(
-      (game) => game.earnedTrophies?.platinum > 0
+    const filteredTrophies = trophies.filter(
+        (t) => activeFilter === 'all' || t.category?.includes(activeFilter)
     );
-    console.log(`Found ${platinumGames.length} Platinum games out of ${allTitles.length} total titles.`);
 
-    const platinums = [];
+    return (
+        <div style={styles.container}>
+            <nav style={styles.nav}>
+                <button style={styles.backBtn} onClick={onBack}>
+                    &larr; Return to Portal
+                </button>
+                <div style={styles.counter}>
+                    Total Platinum Trophies: <strong>{trophies.length}</strong>
+                </div>
+            </nav>
 
+            <header style={styles.header}>
+                <h1 style={styles.title}>Platinum Archives</h1>
+                <p style={styles.subtitle}>
+                    "Conquered horrors, physical trials, and digital torment."
+                </p>
+            </header>
 
-    for (let i = 0; i < platinumGames.length; i++) {
-      const game = platinumGames[i];
-      const serviceOption = {
-        npServiceName: game.trophyTitlePlatform !== 'PS5' ? 'trophy' : undefined,
-        limit: 5
-      };
+            {/* Filter Buttons */}
+            <div style={styles.filters}>
+                {['all', 'horror', 'hardest', 'favorites'].map((cat) => (
+                    <button
+                        key={cat}
+                        onClick={() => setActiveFilter(cat)}
+                        style={{
+                            ...styles.filterBtn,
+                            ...(activeFilter === cat ? styles.filterBtnActive : {})
+                        }}
+                    >
+                        {cat === 'all' ? 'All Relics' : cat}
+                    </button>
+                ))}
+            </div>
 
-      let rarityText = 'Ultra Rare';
-      let trophyName = 'Platinum Achieved';
-      let unlockedDate = new Date(game.lastUpdatedDateTime).toLocaleDateString();
-      let iconUrl = game.trophyTitleIconUrl;
+            {/* Loading & Error States */}
+            {loading && <p style={{ textAlign: 'center', color: '#94a3b8' }}>Summoning relics from PSN...</p>}
+            {error && <p style={{ textAlign: 'center', color: '#ef4444' }}>{error}</p>}
 
-      try {
-        const earnedRes = await getUserTrophiesEarnedForTitle(
-          authorization,
-          'me',
-          game.npCommunicationId,
-          'default',
-          serviceOption
-        );
+            {/* Trophy Cards */}
+            {!loading && !error && (
+                <div style={styles.grid}>
+                    {filteredTrophies.map((trophy) => {
+                        const id = trophy.id || trophy.npCommunicationId || trophy.title;
+                        const title = trophy.title;
+                        const icon = trophy.icon;
+                        const unlockedDate = trophy.date || 'Recorded';
+                        const rarity = trophy.rarity || 'Ultra Rare';
+                        const trophyBadge = trophy.trophyName || 'Platinum Achieved';
 
-        const platEarned = earnedRes.trophies?.find(
-          (t) => t.trophyType === 'platinum' || t.trophyId === 0
-        );
-
-        if (platEarned) {
-          const tier = RARITY_LABELS[platEarned.trophyRare] ?? 'Rare';
-          const rate = platEarned.trophyEarnedRate ? ` (${platEarned.trophyEarnedRate}%)` : '';
-          rarityText = `${tier}${rate}`;
-
-          if (platEarned.earnedDateTime) {
-            unlockedDate = new Date(platEarned.earnedDateTime).toLocaleDateString();
-          }
-        }
-
-
-        const titleRes = await getTitleTrophies(
-          authorization,
-          game.npCommunicationId,
-          'default',
-          serviceOption
-        );
-
-        const platMeta = titleRes.trophies?.find(
-          (t) => t.trophyType === 'platinum' || t.trophyId === 0
-        );
-
-        if (platMeta?.trophyName) {
-          trophyName = platMeta.trophyName;
-        }
-      } catch (innerErr) {
-        console.warn(`Could not fetch detailed rarity for ${game.trophyTitleName}, using defaults.`);
-      }
-
-      console.log(`[${i + 1}/${platinumGames.length}] ${game.trophyTitleName} -> ${rarityText}`);
-
-      platinums.push({
-        id: game.npCommunicationId,
-        title: game.trophyTitleName,
-        trophyName: trophyName,
-        platform: game.trophyTitlePlatform,
-        icon: iconUrl,
-        date: unlockedDate,
-        rarity: rarityText,
-        earnedTrophies: game.earnedTrophies,
-        isPlatinum: true,
-        category: [],
-        notes: ''
-      });
-
-      await sleep(150);
-    }
-
-    fs.mkdirSync('./public', { recursive: true });
-    fs.writeFileSync('./public/trophies.json', JSON.stringify(platinums, null, 2));
-    console.log(`3. Success! Saved ${platinums.length} Platinum trophies with live rarity to public/trophies.json.`);
-  } catch (err) {
-    console.error('Failed to sync PSN trophies:', err);
-  }
+                        return (
+                            <div key={id} style={styles.card}>
+                                <div style={styles.cardHeader}>
+                                    <img src={icon} alt={title} style={styles.icon} />
+                                    <div>
+                                        <h3 style={styles.gameTitle}>{title}</h3>
+                                        <div style={styles.badge}>🏆 {trophyBadge}</div>
+                                    </div>
+                                </div>
+                                <div style={styles.cardBody}>
+                                    <div style={styles.details}>
+                                        <span>Unlocked: {unlockedDate}</span>
+                                        <span>Rarity: {rarity}</span>
+                                    </div>
+                                    {trophy.notes && <p style={styles.notes}>"{trophy.notes}"</p>}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+    );
 }
 
-syncPlatinums();
+const styles = {
+    container: {
+        padding: '2rem 1rem',
+        maxWidth: '1100px',
+        margin: '0 auto',
+        color: '#e2e8f0',
+        minHeight: '100vh'
+    },
+    nav: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '2rem',
+        borderBottom: '1px solid #22222e',
+        paddingBottom: '1rem'
+    },
+    backBtn: {
+        background: 'none',
+        border: 'none',
+        color: '#8b5cf6',
+        cursor: 'pointer',
+        fontSize: '1rem',
+        fontWeight: 'bold'
+    },
+    counter: { fontSize: '0.85rem', color: '#94a3b8', textTransform: 'uppercase' },
+    header: { textAlign: 'center', marginBottom: '2.5rem' },
+    title: {
+        fontSize: '2.5rem',
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase',
+        color: '#8b5cf6',
+        textShadow: '0 0 12px rgba(139, 92, 246, 0.4)'
+    },
+    subtitle: { color: '#94a3b8', fontStyle: 'italic' },
+    filters: { display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem' },
+    filterBtn: {
+        background: '#111116',
+        border: '1px solid #22222e',
+        color: '#94a3b8',
+        padding: '0.5rem 1rem',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        textTransform: 'uppercase',
+        fontSize: '0.8rem'
+    },
+    filterBtnActive: {
+        borderColor: '#8b5cf6',
+        color: '#e2e8f0',
+        boxShadow: '0 0 10px rgba(139, 92, 246, 0.4)'
+    },
+    grid: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+        gap: '1.5rem'
+    },
+    card: {
+        background: '#111116',
+        border: '1px solid #22222e',
+        borderRadius: '8px',
+        padding: '1.25rem'
+    },
+    cardHeader: { display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' },
+    icon: { width: '56px', height: '56px', borderRadius: '6px' },
+    gameTitle: { fontSize: '1.1rem', margin: 0 },
+    badge: { fontSize: '0.75rem', color: '#e0f2fe', marginTop: '0.25rem' },
+    cardBody: { borderTop: '1px solid #22222e', paddingTop: '0.75rem' },
+    details: { display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.5rem' },
+    notes: { fontSize: '0.85rem', color: '#cbd5e1', fontStyle: 'italic', margin: 0 }
+};
