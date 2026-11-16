@@ -26,7 +26,6 @@ async function syncPlatinums() {
     const pageSize = 250;
     let totalItemCount = Infinity;
 
-    // Page through your entire PSN library until all games are fetched
     while (offset < totalItemCount) {
       const response = await getUserTitles(authorization, 'me', {
         limit: pageSize,
@@ -43,7 +42,6 @@ async function syncPlatinums() {
       offset += titles.length;
     }
 
-    // Filter the complete library down to games where you earned the Platinum
     const platinums = allTitles
       .filter((game) => game.earnedTrophies?.platinum > 0)
       .map((game) => ({
