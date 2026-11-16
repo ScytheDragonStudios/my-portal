@@ -56,7 +56,7 @@ export default function VectorKarts({ onBack, isBroken }) {
       special: "★ SPECIAL: HICCUPOPOCALYPSE - Mothman randomly swoops down and picks up a racer to drag off the track, racer reappers at a random space on the track.",
       lore: "A weird frog girl from Ohio (Their words). Obsessed with Frogs, Beat Saber, and Mothman.  THEY WILL FIND HIM. MARK THEIR WORDS. "
     },
-    bread: {
+   /*bread: {
     name: "Bread",
     title: "Featured Vtuber // Computer Worm",
     color: "text-orange-400",
@@ -64,7 +64,7 @@ export default function VectorKarts({ onBack, isBroken }) {
     stats: { speed: "87%", accel: "90%", drift: "88%" },
     special: "★ SPECIAL: BREADDAGEDDON - (temp) Drop loaves of bread onto the track that explode, any racer touched by an explosion is sent flying to a random part of the map",
     lore: "A sentient computer virus hell-bent on corrupting everything. Tried to join the game in order to corrupt the tracks for funsies.  Very quickly realized that doesn't work."
-    },
+    },*/
     queen: {
       name: "KumberQueen",
       title: "Featured Voice Actor // Cucumber Thingey",
