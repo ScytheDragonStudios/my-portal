@@ -14,8 +14,13 @@ export default function AlphaVault({ onBack }) {
       title: "01 // GRAVEROBBER (2.5D Vertical Slice)",
       file: "./builds/graverobber.enc",
       controls: "WASD: Move | E: Interact | Shift: Cloak Lantern | Q: Toss Coin | F: Deep Focus | Tab: Lexicon"
+    },
+    {
+      id: "tarot",
+      title: "02 // Tarot (Unfinished alpha prototype)",
+      file: "./builds/tarot.enc",
+      controls: "Point and click game"
     }
-    // Add future encrypted .enc builds here
   ];
 
   const decryptBuild = async (fileUrl, password) => {
