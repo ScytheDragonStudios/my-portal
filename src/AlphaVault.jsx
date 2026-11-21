@@ -12,14 +12,23 @@ export default function AlphaVault({ onBack }) {
     {
       id: "graverobber",
       title: "01 // GRAVEROBBER (2.5D Vertical Slice)",
+      type: "encrypted",
       file: "./builds/graverobber.enc",
       controls: "WASD: Move | E: Interact | Shift: Cloak Lantern | Q: Toss Coin | F: Deep Focus | Tab: Lexicon"
     },
     {
       id: "tarot",
       title: "02 // Tarot (Unfinished alpha prototype)",
+      type: "encrypted",
       file: "./builds/tarot.enc",
-      controls: "Point and click game"
+      controls: "Point and click to move, inspect, and make deductions"
+    },
+    {
+      id: "mycelia",
+      title: "03 // Mycelia (Alpha Demo)",
+      type: "public",
+      file: "/builds/Mycelia/index.html",
+      controls: "Left click and move mouse to infect and pick options"
     }
   ];
 
@@ -64,14 +73,28 @@ export default function AlphaVault({ onBack }) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    decryptBuild(PROJECTS[activeProject].file, passkey.trim().toLowerCase());
+    const key = passkey.trim().toLowerCase();
+    const current = PROJECTS[activeProject];
+    
+    if (current.type === "encrypted") {
+        decryptBuild(current.file, key);
+    } else {
+        // If logging into a public folder, verify the password against Graverobber
+        decryptBuild(PROJECTS[0].file, key); 
+    }
   };
 
   useEffect(() => {
     if (unlockedKey) {
-      decryptBuild(PROJECTS[activeProject].file, unlockedKey);
+      const current = PROJECTS[activeProject];
+      if (current.type === "encrypted") {
+        decryptBuild(current.file, unlockedKey);
+      } else {
+        // Bypasses the decrypt phase for public folders and loads the UI
+        setDecryptedHtml("PUBLIC_MOUNT"); 
+      }
     }
-  }, [activeProject]);
+  }, [activeProject, unlockedKey]); // Added unlockedKey to dependency array
 
   const currentProj = PROJECTS[activeProject];
 
@@ -158,12 +181,21 @@ export default function AlphaVault({ onBack }) {
         </div>
       ) : (
         <div id="vault-stage" className="flex-1 flex flex-col bg-black border border-zinc-800 min-h-[600px] relative">
-          <iframe
-            srcDoc={decryptedHtml}
-            title="Alpha Vault Viewport"
-            className="w-full flex-1 border-none min-h-[600px]"
-            allow="autoplay; fullscreen"
-          />
+          {currentProj.type === "public" ? (
+            <iframe
+              src={currentProj.file}
+              title="Alpha Vault Viewport"
+              className="w-full flex-1 border-none min-h-[600px]"
+              allow="autoplay; fullscreen"
+            />
+          ) : (
+            <iframe
+              srcDoc={decryptedHtml}
+              title="Alpha Vault Viewport"
+              className="w-full flex-1 border-none min-h-[600px]"
+              allow="autoplay; fullscreen"
+            />
+          )}
           <div className="bg-zinc-950 p-3 border-t border-zinc-800 flex justify-between items-center text-[11px] text-zinc-400 flex-wrap gap-2">
             <span><strong className="text-zinc-200">Controls:</strong> {currentProj.controls}</span>
             <span className="text-red-500/80 font-bold tracking-widest text-[10px]">
