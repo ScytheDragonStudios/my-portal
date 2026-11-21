@@ -26,8 +26,8 @@ export default function AlphaVault({ onBack }) {
     {
       id: "mycelia",
       title: "03 // Mycelia (Alpha Demo)",
-      type: "public",
-      file: "/builds/Mycelia/index.html",
+      type: "external",
+      file: "https://mycelia-alpha.onrender.com",
       controls: "Left click and move mouse to infect and pick options"
     }
   ];
@@ -181,7 +181,7 @@ export default function AlphaVault({ onBack }) {
         </div>
       ) : (
         <div id="vault-stage" className="flex-1 flex flex-col bg-black border border-zinc-800 min-h-[600px] relative">
-          {currentProj.type === "public" ? (
+          {currentProj.type === "external" ? (
             <iframe
               src={currentProj.file}
               title="Alpha Vault Viewport"
